@@ -1,0 +1,32 @@
+<div class="table-div">
+    <div class="info-msg">* Edit the name and then press 'Enter' key to save it.</div>
+    <div *ngIf="showTable">
+        <table mat-table [dataSource]="tableDetails" class="mat-elevation-z8">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-form-field class="example-form-field">
+                        <input matInput type="text" [(ngModel)]="element.name"
+                            (keydown.enter)="nameInputEnterEvent(element)">
+                    </mat-form-field>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="active">
+                <th mat-header-cell *matHeaderCellDef> Activation Status </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-slide-toggle [(ngModel)]="element.active" (change)="updateDetails(element)"></mat-slide-toggle>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="dateOfBirth">
+                <th mat-header-cell *matHeaderCellDef> Date of birth </th>
+                <td mat-cell *matCellDef="let element"> {{element.dateOfBirth | date : 'dd/MM/yyyy'}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>
